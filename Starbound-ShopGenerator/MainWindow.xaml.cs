@@ -85,7 +85,15 @@ namespace Starbound_ShopGenerator
 
         private void btnAddClipboard_Click(object sender, RoutedEventArgs e)
         {
-            TryAddItem(Clipboard.GetText());
+            if (Clipboard.ContainsText())
+            {
+                TryAddItem(Clipboard.GetText());
+            }
+            else
+            {
+                MessageBox.Show("The clipboard does not contain any text!");
+            }
+            
         }
 
         #endregion
