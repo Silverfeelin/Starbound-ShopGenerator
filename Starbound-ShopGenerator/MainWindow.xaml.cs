@@ -236,8 +236,10 @@ namespace Starbound_ShopGenerator
             JObject shop = GetShop(settings);
 
             string command = string.Format("/spawnitem {0} 1 '{1}'", settings.Type, shop["parameters"].ToString(Formatting.None).Replace("'", "\\'").Replace(@"""regex"":""x?\\d{0,3}""", @"""regex"":""x?\\\\d{0,3}"""));
+
             Clipboard.SetText(command);
 
+            MessageBox.Show("Command copied to clipboard!");
         }
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
@@ -254,6 +256,8 @@ namespace Starbound_ShopGenerator
             JObject shop = GetShop(GetTemplateSettings());
 
             File.WriteAllText(sfd.FileName, shop.ToString(Formatting.Indented));
+
+            MessageBox.Show("File saved to '" + sfd.FileName + "'!");
         }
 
         #endregion
