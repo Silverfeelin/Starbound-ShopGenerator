@@ -104,7 +104,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Resources\Template.json" />
+    <Resource Include="Resources\Template.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
