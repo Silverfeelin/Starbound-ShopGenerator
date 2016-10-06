@@ -59,7 +59,8 @@ namespace Starbound_ShopGenerator
             {
                 Filter = "JSON Files|*.json|All Files|*.*",
                 Multiselect = true,
-                CheckFileExists = true
+                CheckFileExists = true,
+                Title = "Select StarCheat Export(s)"
             };
 
             bool? res = ofd.ShowDialog();
