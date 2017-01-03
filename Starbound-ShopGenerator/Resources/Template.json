@@ -39,13 +39,13 @@
 						"type": "button"
 					},
 					"close": {
-						"base": "/interface/inventory/x.png",
-						"hover": "/interface/inventory/xhover.png",
+						"base": "/interface/x.png",
+						"hover": "/interface/xhover.png",
 						"position": [
 							322,
 							261
 						],
-						"press": "/interface/inventory/xpress.png",
+						"press": "/interface/xpress.png",
 						"type": "button"
 					},
 					"description": {
