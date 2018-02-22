@@ -25,6 +25,13 @@ $(function() {
   
   document.getElementById("featureBackground").style.backgroundImage = "url('" + path +  "')";
   
+  // Enable tooltips
+  $('[data-toggle="tooltip"]').tooltip({delay: {show: 500}});
+  $('[data-toggle="tooltip"]').click(function() {
+    // Hide necessary to prevent disabled buttons from having their tooltip frozen.
+    $(this).tooltip("hide");
+  });
+  
   $("#itemDescriptorAddError").hide();
   $("#itemDescriptorEditError").hide();
   $("#editDiv :input").attr("disabled", true);
@@ -110,6 +117,24 @@ $(function() {
     $(itemList).empty();
     $(itemList).change();
   });
+  
+  // Select shop style
+  $("#shopStyle").change(function () {
+    var style = $("#shopStyle > option:selected").first().val();
+    
+    var cvs = document.getElementById("shopStyleCanvas");
+    var ctx = cvs.getContext('2d');
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false;
+    ctx.msImageSmoothingEnabled = false;
+    
+    var img = new Image;
+    img.onload = function(){
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img.width * 2, img.height * 2); // Or at whatever offset you like
+    };
+    img.src = "../lib/img/" + style + ".png";
+  }).change();
   
   // Load from storage
   loadItems();
