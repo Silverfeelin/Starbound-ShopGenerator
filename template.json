@@ -1,0 +1,87 @@
+{
+  "itemName": "paintgunpurple",
+  "shortdescription": "My Text Item",
+  "category": "^orange;Text Particles^reset;",
+  "description": "This item belongs to me.",
+  "rarity": "Essential",
+  "inventoryIcon": "/particles/huh/1.png",
+  "price": 0,
+  "maxStack": 1000,
+  "twoHanded": false,
+  "primaryAbility": {
+    "fireTime": 0.18,
+    "baseDps": 0,
+    "energyUsage": 0,
+    "inaccuracy": 1,
+    "burstTime" : 0.1,
+    "burstCount" : 3,
+    "projectileCount": 1,
+    "fireType": "auto",
+    "projectileType": "invisibleprojectile",
+    "projectileParameters": {
+      "damageType": "NoDamage",
+      "power": 0,
+      "speed": 0,
+      "timeToLive": 0.03,
+      "universalDamage": false,
+      "actionOnReap": [
+        {
+          "action": "sound",
+          "options": [
+            "/sfx/melee/blunt_hit_organic.ogg"
+          ]
+        },
+        {
+          "action": "particle",
+          "specification": {
+            "size": 1,
+            "color": [
+              255,
+              255,
+              255
+            ],
+            "timeToLive": 0.4,
+            "destructionAction": "fade",
+            "destructionTime": 0.8,
+            "position": [
+              0,
+              5
+            ],
+            "type": "text",
+            "text": "^orange;^shadow;Hello World",
+            "variance": {
+              "velocity": [
+                0.1,
+                0.2
+              ],
+              "approach": [
+                10,
+                10
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "stances": {
+      "idle": {
+        "twoHanded": false
+      },
+      "fire": {
+        "twoHanded": false
+      },
+      "cooldown": {
+        "twoHanded": false
+      }
+    }
+  },
+  "animationParts": {
+    "middle": ""
+  },
+  "animationCustom": {
+    "sounds": {
+      "fire": []
+    }
+  },
+  "builder": "/items/buildscripts/buildunrandweapon.lua"
+}

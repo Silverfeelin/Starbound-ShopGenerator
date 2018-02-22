@@ -1,0 +1,10 @@
+@charset "utf-8";
+@font-face {
+	font-family: 'HoboWeb';
+	src: url("../fonts/hobo.woff") format('woff');
+}
+
+.hobo {
+  font-family: 'Hobo', 'HoboWeb', "Lucida Console", Monaco, monospace;
+  font-size: 32px;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!-- Template by Quackit.com -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery -->
+    <script src="lib/js/jquery-3.3.1.min.js"></script>
+    
+    <!-- Custom script -->
+    <script src="js/main.js"></script>
+
+    <title>Shop Generator</title>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <!-- Navigation -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <!-- Logo and responsive toggle -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://github.com/Silverfeelin/">
+              <i class="fa fa-github"></i>
+              <span>Silverfeelin</span>
+            </a>
+          </div>
+
+          <!-- Navbar links -->
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+              <!-- li class="active" -->
+              <li><a href="https://github.com/Silverfeelin/Starbound-ShopGenerator">View project on GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div id="featureBackground">
+        <div id="feature" class="jumbotron feature">
+          <div class="container">
+            <h1><i class="fa fa-tags"></i> Shop Generator </h1>
+            <p>Share your custom items!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="container">
+        <div class="row">
+          <!-- Items Column -->
+          <div class="col-md-6">
+            <h3 class="content-header">Shop Items</h3>
+            <select id="itemList" size="20" class="form-control">
+            </select>
+            <div style="margin-top: 10px;">
+              <button id="btnClear" class="btn btn-danger pull-right">Remove All</button>
+            </div>
+          </div>
+          <!-- Add/Edit Column -->
+          <div class="col-md-6">
+            <!-- Add Row -->
+            <div class="row">
+              <div id="editDiv" class="col-md-12">
+                <h3 class="content-header">Selected Item</h3>
+                <label for="itemDescriptorEdit">Item Descriptor:</label>
+                <textarea id="itemDescriptorEdit" spellcheck="false" class="form-control" style="min-height: 110px; max-height: 330px;"></textarea>
+                <p id="itemDescriptorEditError" style="color: red;"></p>
+                <div style="margin-top: 10px;">
+                  <button id="btnUpdate" class="btn btn-success">Update</button>
+                  <button id="btnCancelUpdate" class="btn btn-default">Cancel</button>
+                  <button id="btnDelete" class="btn btn-danger pull-right">Remove</button>
+                </div>
+              </div>
+            </div>
+            <!-- Edit Row -->
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="content-header">Add Item</h3>
+                <label for="itemDescriptorAdd">Item Descriptor:</label>
+                <textarea id="itemDescriptorAdd" spellcheck="false" class="form-control" style="min-height: 110px; max-height: 330px;"></textarea>
+                <p id="itemDescriptorAddError" style="color: red;"></p>
+                <div style="margin-top: 10px;">
+                  <button class="btn btn-info">Select File</button>
+                  <button id="btnAdd" class="btn btn-success">Add</button>
+                  <div class="btn-group pull-right">
+                    <button id="btnAddTemplate" class="btn btn-warning">Template</button>
+                    <button id="btnAddClear" class="btn btn-danger">Clear</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Add/Edit Column -->
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="content-header">Shop Configuration</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="col-lg-12 small-print">
+        <div class="container">
+          <p style="float:left;"><a href="http://playstarbound.com/">Official Starbound site</a></p>
+            <p style="float:right;">Contact me: <a href="mailto:Silverfeelin@gmail.com">Silverfeelin@gmail.com</a> | <a href="http://discord.gg/Starbound">Starbound Discord (@Silverfeelin)</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="lib/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link href="lib/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="lib/js/bootstrap.min.js"></script>
+    
+    <!-- FileSave.js JavaScript -->
+    <script src="lib/js/FileSaver.min.js"></script>
+    
+    <!-- Clipboard.js Javascript -->
+    <script src="lib/js/clipboard.js"></script>
+    
+    <!-- Durable Json Lint -->
+    <script src="lib/js/durable-json-lint-with-dependencies.min.js"></script>
+
+    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="css/custom.css?v=1.1" rel="stylesheet">
+    <link href="lib/css/font.css" rel="stylesheet">
+  </body>
+</html>
