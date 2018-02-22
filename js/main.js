@@ -133,7 +133,7 @@ $(function() {
     img.onload = function(){
       ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img.width * 2, img.height * 2); // Or at whatever offset you like
     };
-    img.src = "../lib/img/" + style + ".png";
+    img.src = "lib/img/" + style + ".png";
   }).change();
   
   // Load from storage
