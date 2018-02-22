@@ -98,12 +98,26 @@ $(function() {
       $("#editDiv :input").attr("disabled", true);
     }
   });
-    
+  
+  // Unselect item
+  $("#btnClearSelection").click(function() {
+    $("#itemList option:selected").prop("selected", false);
+    $(itemList).change();
+  });
+  
   // Clear items
   $("#btnClear").click(function () {
-    $("#itemList").empty();
-    $("#itemList").change();
+    $(itemList).empty();
+    $(itemList).change();
   });
+  
+  // Load from storage
+  loadItems();
+});
+
+// Page unload
+$(window).on("beforeunload", function() {
+  saveItems();
 });
 
 /**
@@ -209,4 +223,26 @@ function updateItem(option, desc)
 function getItemName(desc)
 {
   return desc.parameters && desc.parameters.shortdescription ? desc.parameters.shortdescription : desc.name;
+}
+
+function loadItems(storageKey = "shopItems")
+{
+  var loadedItems = localStorage.getItem(storageKey);
+  if (loadedItems)
+  {
+    loadedItems = JSON.parse(loadedItems);
+    for (var i = 0; i < loadedItems.length; i++)
+    {
+      addItem(loadedItems[i]);
+    }
+  }
+}
+
+function saveItems(storageKey = "shopItems")
+{
+  var items = [];
+  $("#itemList > option").each(function() {
+    items.push($(this).data("value"));
+  });
+  localStorage.setItem(storageKey, JSON.stringify(items));
 }
