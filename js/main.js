@@ -129,6 +129,8 @@ $(function() {
     ctx.imageSmoothingEnabled = false;
     ctx.msImageSmoothingEnabled = false;
     
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+    
     var img = new Image;
     img.onload = function(){
       ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img.width * 2, img.height * 2); // Or at whatever offset you like
