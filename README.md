@@ -1,6 +1,9 @@
 # Starbound Shop Generator
 A simple tool that generates shops for custom items.
 
+### Looking for the web version?
+### https://silverfeelin.github.io/Starbound-ShopGenerator/
+
 ### Notes
 * This tool is meant for users to make shops to share their items.  
 As of right now, there is no features present that let you set the price for the items.
