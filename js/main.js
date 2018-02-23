@@ -26,10 +26,14 @@ $(function() {
   document.getElementById("featureBackground").style.backgroundImage = "url('" + path +  "')";
   
   // Enable tooltips
-  $('[data-toggle="tooltip"]').tooltip({delay: {show: 500}});
-  $('[data-toggle="tooltip"]').click(function() {
+  $(".hoverTooltip").tooltip({delay: {show: 500}});
+  $(".hoverTooltip").click(function() {
     // Hide necessary to prevent disabled buttons from having their tooltip frozen.
     $(this).tooltip("hide");
+  });
+  
+  $(".clickTooltip").tooltip({
+    trigger: "click"
   });
   
   $("#itemDescriptorAddError").hide();
@@ -138,13 +142,55 @@ $(function() {
     img.src = "lib/img/" + style + ".png";
   }).change();
   
+  // Export descriptor
+  $("#btnExportItem").click(function() {
+    var shop = createShop();
+    var blob = new Blob([ JSON.stringify(shop, null, 2) ], {type: "text/plain;charset=utf8"});
+    saveAs(blob, "CustomShop.json");
+  });
+  
+  // Copy descriptor
+  var copyItem = new Clipboard("#btnCopyItem", {
+    text: function() {
+      var shop = createShop();
+      return JSON.stringify(shop);
+    }
+  });
+  copyItem.on("success", function() {
+    showTooltip("#btnCopyItem", "Copied!", 1000);
+  });
+  copyItem.on("error", function() {
+    showTooltip("#btnCopyItem", "Failed!", 1000);
+  });
+  
+  // Export spawnitem
+  $("#btnExportCommand").click(function() {
+    var shop = createShop();
+    var blob = new Blob([ getCommand(shop) ], {type: "text/plain;charset=utf8"});
+    saveAs(blob, "CustomShop.json");
+  });
+  
+  // Copy spawnitem
+  var copyCommand = new Clipboard("#btnCopyCommand", {
+    text: function() {
+      var shop = createShop();
+      return getCommand(shop);
+    }
+  });
+  copyCommand.on("success", function() {
+    showTooltip("#btnCopyCommand", "Copied!", 1000);
+  });
+  copyCommand.on("error", function() {
+    showTooltip("#btnCopyCommand", "Failed!", 1000);
+  });
+  
   // Load from storage
   loadItems();
 });
 
 // Page unload
 $(window).on("beforeunload", function() {
-  saveItems();
+  storeItems();
 });
 
 /**
@@ -252,6 +298,26 @@ function getItemName(desc)
   return desc.parameters && desc.parameters.shortdescription ? desc.parameters.shortdescription : desc.name;
 }
 
+function createShop() {
+  var t = JSON.parse(JSON.stringify(shopTemplate));
+  t.name = $("#shopStyle > option:selected").first().val();
+  var title = "   " + $("#shopTitle").val(),
+      subtitle = "   " + $("#shopSubtitle").val();
+
+  t.parameters.shortdescription = title;
+  t.parameters.interactData.config.paneLayout.windowtitle.title = title;
+  t.parameters.interactData.config.paneLayout.windowtitle.subtitle = subtitle;
+
+  var recipes = [];
+  $("#itemList > option").each(function () {
+    var desc = $(this).data("value");
+    recipes.push({input: [], output: desc});
+  });
+  t.parameters.interactData.recipes = recipes;
+  
+  return t;
+}
+
 function loadItems(storageKey = "shopItems")
 {
   var loadedItems = localStorage.getItem(storageKey);
@@ -265,11 +331,24 @@ function loadItems(storageKey = "shopItems")
   }
 }
 
-function saveItems(storageKey = "shopItems")
+function storeItems(storageKey = "shopItems")
 {
   var items = [];
   $("#itemList > option").each(function() {
     items.push($(this).data("value"));
   });
   localStorage.setItem(storageKey, JSON.stringify(items));
+}
+
+function getCommand(desc)
+{
+  return "/spawnitem " + desc.name + " 1 " + "'" + JSON.stringify(desc.parameters).replace(/'/g, "\\'") + "'";
+}
+
+function showTooltip(tooltip, message, time)
+{
+  $(tooltip).tooltip("hide").attr("data-original-title", message).tooltip("show");
+    setTimeout(function() {
+      $(tooltip).tooltip("hide");
+    }, time);
 }

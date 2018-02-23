@@ -11,6 +11,7 @@
     
     <!-- Custom script -->
     <script src="js/main.js"></script>
+    <script src="js/template.js"></script>
 
     <title>Shop Generator</title>
   </head>
@@ -62,8 +63,8 @@
             <select id="itemList" size="20" class="form-control">
             </select>
             <div style="margin-top: 10px;">
-              <button id="btnClearSelection" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Unselects the selected item.">Clear Selection</button>
-              <button id="btnClear" class="btn btn-danger pull-right" data-toggle="tooltip" data-placement="bottom" title="Removes all items from the list. Dangerous!">Remove All</button>
+              <button id="btnClearSelection" class="hoverTooltip btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Unselects the selected item.">Clear Selection</button>
+              <button id="btnClear" class="hoverTooltip btn btn-danger pull-right" data-toggle="tooltip" data-placement="bottom" title="Removes all items from the list. Dangerous!">Remove All</button>
             </div>
           </div>
           <!-- Add/Edit Column -->
@@ -76,9 +77,9 @@
                 <textarea id="itemDescriptorEdit" spellcheck="false" class="form-control" style="min-width: 175px; min-height: 110px; max-height: 330px;"></textarea>
                 <p id="itemDescriptorEditError" style="color: red;"></p>
                 <div style="margin-top: 10px;">
-                  <button id="btnUpdate" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Update the item descriptor.">Update</button>
-                  <button id="btnCancelUpdate" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Revert changes (only if you haven't pressed update yet).">Cancel</button>
-                  <button id="btnDelete" class="btn btn-danger pull-right" data-toggle="tooltip" data-placement="bottom" title="Remove this item descriptor.">Remove</button>
+                  <button id="btnUpdate" class="hoverTooltip btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Update the item descriptor.">Update</button>
+                  <button id="btnCancelUpdate" class="hoverTooltip btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Revert changes (only if you haven't pressed update yet).">Cancel</button>
+                  <button id="btnDelete" class="hoverTooltip btn btn-danger pull-right" data-toggle="tooltip" data-placement="bottom" title="Remove this item descriptor.">Remove</button>
                 </div>
               </div>
             </div>
@@ -90,11 +91,11 @@
                 <textarea id="itemDescriptorAdd" placeholder="{&#10;  &quot;name&quot;: &quot;silverore&quot&#10  &quot;count&quot;: 1&#10}" spellcheck="false" class="form-control" style="min-width: 175px; min-height: 110px; max-height: 330px;"></textarea>
                 <p id="itemDescriptorAddError" style="color: red;"></p>
                 <div style="margin-top: 10px;">
-                  <button class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Load an item descriptor from a text file.">Select File</button>
-                  <button id="btnAdd" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Add the above item descriptor.">Add</button>
+                  <button class="hoverTooltip btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Load an item descriptor from a text file.">Select File</button>
+                  <button id="btnAdd" class="hoverTooltip btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Add the above item descriptor.">Add</button>
                   <div class="btn-group pull-right">
-                    <button id="btnAddTemplate" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Load a small working item descriptor.">Template</button>
-                    <button id="btnAddClear" class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Clear the item descriptor.">Clear</button>
+                    <button id="btnAddTemplate" class="hoverTooltip btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Load a small working item descriptor.">Template</button>
+                    <button id="btnAddClear" class="hoverTooltip btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Clear the item descriptor.">Clear</button>
                   </div>
                 </div>
               </div>
@@ -106,11 +107,11 @@
           <div class="col-md-6">
             <h3 class="content-header">Shop Configuration</h3>
             <label for="shopTitle">Title:</label>
-            <input id="shopTitle" class="form-control" type="text" data-toggle="tooltip" data-placement="bottom" title="Set the shop title." placeholder="My awesome items!"/>
+            <input id="shopTitle" class="hoverTooltip form-control" type="text" data-toggle="tooltip" data-placement="bottom" title="Set the shop title." placeholder="My awesome items!"/>
             <label for="shopSubtitle">Subtitle:</label>
-            <input id="shopSubtitle" class="form-control" type="text" data-toggle="tooltip" data-placement="bottom" title="Set the shop subtitle."/>
+            <input id="shopSubtitle" class="hoverTooltip form-control" type="text" data-toggle="tooltip" data-placement="bottom" title="Set the shop subtitle."/>
             <label for="shopStyle">Style:</label>
-            <select id="shopStyle" class="form-control" data-toggle="tooltip" data-placement="bottom" title="Choose the object image for your shop.">
+            <select id="shopStyle" class="hoverTooltip form-control" data-toggle="tooltip" data-placement="bottom" title="Choose the object image for your shop.">
               <option selected>marketstall1</option>
               <option>marketstall2</option>
               <option>marketstall3</option>
@@ -122,6 +123,14 @@
           </div>
           <div class="col-md-6">
             <h3 class="content-header">Export</h3>
+            <div class="btn-group">
+              <button id="btnExportItem" class="btn btn-info">Item Descriptor</button>
+              <button id="btnCopyItem" class="clickTooltip btn" data-clipboard-action="copy" data-placement="right">Copy</button>
+            </div>
+            <div class="btn-group">
+              <button id="btnExportCommand" class="btn btn-info"><kbd>/spawnitem</kbd> Command</button>
+              <button id="btnCopyCommand" class="clickTooltip btn" data-clipboard-action="copy" data-placement="right">Copy</button>
+            </div>
           </div>
         </div>
       </div>
