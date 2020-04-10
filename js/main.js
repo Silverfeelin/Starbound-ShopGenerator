@@ -183,6 +183,37 @@ $(function() {
   copyCommand.on("error", function() {
     showTooltip("#btnCopyCommand", "Failed!", 1000);
   });
+
+  // Import
+  $("#btnImport").click(function() {
+    let prompted = prompt('Item descriptor');
+    try {
+      let data = JSON.parse(prompted);
+      if (!data || !data.parameters) { return; }
+
+      let title = data.parameters.shortdescription || '';
+      $("#shopTitle").val(title.trim());
+      let subtitle = data.parameters.interactData.config.paneLayout.windowtitle.subtitle || '';
+      $("#shopSubtitle").val(subtitle.trim());
+      let style = data.name;
+      $("#shopStyle").val(style).trigger('change');
+
+      let recipes = data.parameters.interactData.recipes;
+      let list = $("#itemList");
+      list.empty();
+      for (let recipe of recipes) {
+        let desc = recipe.output;
+        $("<option>")
+          .html(getItemName(desc))
+          .data("value", desc)
+          .appendTo(list);
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert('Failed to import. Make sure you enter a valid shop item descriptor.');
+    }
+  });
   
   // Load from storage
   loadItems();
@@ -201,8 +232,7 @@ $(window).on("beforeunload", function() {
 * @param {string} errorLabel - jQuery selector for the error <p> to show the error in.
 * @return {object} Item descriptor object, or null if the descriptor isn't valid.
 */
-function getItemDescriptor(textArea, errorLabel)
-{
+function getItemDescriptor(textArea, errorLabel) {
   var res = durableJsonLint($(textArea).val());
   var j = JSON.parse(res.json),
       e = res.errors;
@@ -243,8 +273,7 @@ function getItemDescriptor(textArea, errorLabel)
 * @param {string} id - jQuery selector for <p> to set message in.
 * @param {string} message - Message to display.
 */
-function showError(id, message)
-{
+function showError(id, message) {
   $(id).html(message);
   $(id).show();
 }
@@ -254,8 +283,7 @@ function showError(id, message)
 * Does not check for item validity.
 * @param {object} desc - Valid item descriptor.
 */
-function addItem(desc)
-{
+function addItem(desc) {
   var el = $('<option>', {
     text: getItemName(desc)
   })
@@ -268,8 +296,7 @@ function addItem(desc)
 * If no item is selected, ret.length will be 0.
 * @return {object} - jQuery object of the selected item.
 */
-function getSelectedOption()
-{
+function getSelectedOption() {
   return $("#itemList :selected").first();
 }
 
@@ -279,10 +306,8 @@ function getSelectedOption()
 * @param {object} option - jQuery object of the <option> to update.
 * @param {object} desc - Valid item descriptor.
 */
-function updateItem(option, desc)
-{
-  if (option.data("value"))
-  {
+function updateItem(option, desc) {
+  if (option.data("value")) {
     option.data("value", desc);
   }
   option.html(getItemName(desc));
@@ -293,8 +318,7 @@ function updateItem(option, desc)
 * @param {object} desc - Valid item descriptor.
 * @return {string} - Item name (prioritizes shortdescription over name).
 */
-function getItemName(desc)
-{
+function getItemName(desc) {
   return desc.parameters && desc.parameters.shortdescription ? desc.parameters.shortdescription : desc.name;
 }
 
@@ -318,21 +342,17 @@ function createShop() {
   return t;
 }
 
-function loadItems(storageKey = "shopItems")
-{
+function loadItems(storageKey = "shopItems") {
   var loadedItems = localStorage.getItem(storageKey);
-  if (loadedItems)
-  {
+  if (loadedItems) {
     loadedItems = JSON.parse(loadedItems);
-    for (var i = 0; i < loadedItems.length; i++)
-    {
+    for (var i = 0; i < loadedItems.length; i++) {
       addItem(loadedItems[i]);
     }
   }
 }
 
-function storeItems(storageKey = "shopItems")
-{
+function storeItems(storageKey = "shopItems") {
   var items = [];
   $("#itemList > option").each(function() {
     items.push($(this).data("value"));
@@ -340,13 +360,11 @@ function storeItems(storageKey = "shopItems")
   localStorage.setItem(storageKey, JSON.stringify(items));
 }
 
-function getCommand(desc)
-{
+function getCommand(desc) {
   return "/spawnitem " + desc.name + " 1 " + "'" + JSON.stringify(desc.parameters).replace(/'/g, "\\'") + "'";
 }
 
-function showTooltip(tooltip, message, time)
-{
+function showTooltip(tooltip, message, time) {
   $(tooltip).tooltip("hide").attr("data-original-title", message).tooltip("show");
     setTimeout(function() {
       $(tooltip).tooltip("hide");
